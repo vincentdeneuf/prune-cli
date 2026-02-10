@@ -1,1 +1,1 @@
-"""Tests for tidy."""
+"""Tests for prune."""

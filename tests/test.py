@@ -57,6 +57,7 @@ def example_function():
     y = 10  # noqa: E501  # This comment should be preserved by default, removed with --inline
     z = 15  # pragma: no cover  # This comment should be preserved by default, removed with --inline
 
+    # Assert statements that should be removed with tidy asserts
     assert x > 0, (
         "x must be positive"
     )  # This assert should be removed with tidy asserts

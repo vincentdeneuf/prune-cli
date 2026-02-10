@@ -3,9 +3,9 @@ requires = ["setuptools>=61.0", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "tidy"
+name = "prune-cli"
 version = "0.1.0"
-description = "A CLI tool named tidy"
+description = "A CLI tool named prune for cleaning Python code"
 readme = "README.md"
 requires-python = ">=3.11"
 license = "MIT"
@@ -30,15 +30,15 @@ classifiers = [
   "Topic :: Software Development :: Code Generators",
 ]
 
-keywords = ["cli", "code", "formatting", "refactor", "ast"]
+keywords = ["cli", "code", "formatting", "refactor", "ast", "prune"]
 
 [project.urls]
-Homepage = "https://github.com/vincentdeneuf/tidy"
-Repository = "https://github.com/vincentdeneuf/tidy"
-Issues = "https://github.com/vincentdeneuf/tidy/issues"
+Homepage = "https://github.com/vincentdeneuf/prune-cli"
+Repository = "https://github.com/vincentdeneuf/prune-cli"
+Issues = "https://github.com/vincentdeneuf/prune-cli/issues"
 
 [project.scripts]
-tidy = "tidy.main:main"
+prune = "prune.main:main"
 
 [tool.setuptools.packages.find]
 where = ["src"]

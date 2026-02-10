@@ -1,4 +1,4 @@
-"""Main entry point for the tidy CLI."""
+"""Main entry point for the prune CLI."""
 
 import argparse
 import os
@@ -6,7 +6,7 @@ import sys
 
 import libcst as cst
 
-from tidy.transformers import (
+from prune.transformers import (
     AssertRemover,
     DocstringRemover,
     HeaderCommentRemover,
@@ -142,7 +142,7 @@ def process_file(
 
 
 def main() -> int:
-    """Main entry point for the tidy CLI."""
+    """Main entry point for the prune CLI."""
     parser = argparse.ArgumentParser(
         description="Remove print statements, comments, docstrings, asserts, and logs from Python files."
     )
@@ -213,7 +213,7 @@ def main() -> int:
 
         # Require at least one flag
         if not any(comment_flags.values()):
-            print("Error: tidy comments requires at least one flag")
+            print("Error: prune comments requires at least one flag")
             print("Available flags:")
             print(
                 "  --default   Remove inline comments only (preserve noqa, type:, pragma)"
@@ -242,7 +242,7 @@ def main() -> int:
 
         # Require at least one flag
         if not any(log_flags.values()):
-            print("Error: tidy logs requires at least one flag")
+            print("Error: prune logs requires at least one flag")
             print("Available flags:")
             print("  --trace      Remove trace level logs")
             print("  --debug      Remove debug level logs")

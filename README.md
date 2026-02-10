@@ -1,50 +1,50 @@
-# Tidy
+# prune
 
-A CLI tool named tidy for cleaning Python code.
+A CLI tool named prune for cleaning Python code.
 
 ## Installation
 
 ```bash
-pip install tidy
+pip install prune-cli
 ```
 
 ## Usage
 
 ```bash
-tidy <command> [options]
+prune <command> [options]
 ```
 
 ### Commands
 
-- `tidy comments` - Remove comments from Python files
-- `tidy prints` - Remove print statements from Python files  
-- `tidy docstrings` - Remove docstrings from Python files
-- `tidy asserts` - Remove assert statements from Python files
-- `tidy logs` - Remove logging statements from Python files
+- `prune comments` - Remove comments from Python files
+- `prune prints` - Remove print statements from Python files  
+- `prune docstrings` - Remove docstrings from Python files
+- `prune asserts` - Remove assert statements from Python files
+- `prune logs` - Remove logging statements from Python files
 
 ### Examples
 
 ```bash
 # Remove all print statements
-tidy prints
+prune prints
 
 # Remove inline comments only (preserve noqa, type:, pragma)
-tidy comments --default
+prune comments --default
 
 # Remove all types of comments
-tidy comments --all
+prune comments --all
 
 # Remove specific log levels
-tidy logs --debug --info --error
+prune logs --debug --info --error
 
 # Remove all log levels
-tidy logs --all
+prune logs --all
 
 # Show per-file details (verbose is default)
-tidy prints
+prune prints
 
 # Suppress per-file output
-tidy prints --quiet
+prune prints --quiet
 ```
 
 ## Development
