@@ -1,5 +1,8 @@
 #!/usr/bin/env python3
 # This is a header comment that should be removed with --header
+# This is a header comment that should be removed with --header
+
+# This is another header comment that should be removed with --header
 
 """This is a module docstring that should be removed with tidy docstrings."""
 

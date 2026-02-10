@@ -68,40 +68,57 @@ class InlineCommentRemover(cst.CSTTransformer):
 
 
 class LeadingCommentRemover(cst.CSTTransformer):
-    """Transformer to remove standalone/full-line comments."""
+    """Transformer to remove standalone leading comments everywhere."""
 
     def __init__(self):
         self.removed_count = 0
 
-    def leave_Module(
+    def _filter_leading_lines(
         self,
-        original_node: cst.Module,
-        updated_node: cst.Module,
-    ) -> cst.Module:
-        if not updated_node.leading_lines:
-            return updated_node
-
+        lines: list[cst.EmptyLine],
+    ) -> list[cst.EmptyLine]:
         new_lines: list[cst.EmptyLine] = []
 
-        for line in updated_node.leading_lines:
-            if isinstance(line, cst.EmptyLine) and line.comment:
+        for line in lines:
+            if line.comment:
                 self.removed_count += 1
                 continue
             new_lines.append(line)
 
+        return new_lines
+
+    def leave_SimpleStatementLine(
+        self,
+        original_node: cst.SimpleStatementLine,
+        updated_node: cst.SimpleStatementLine,
+    ):
+        if not updated_node.leading_lines:
+            return updated_node
+
+        new_lines = self._filter_leading_lines(updated_node.leading_lines)
         return updated_node.with_changes(leading_lines=new_lines)
 
-    def leave_EmptyLine(
+    def leave_FunctionDef(
         self,
-        original_node: cst.EmptyLine,
-        updated_node: cst.EmptyLine,
-    ) -> cst.EmptyLine:
-        if updated_node.comment:
-            self.removed_count += 1
-            return updated_node.with_changes(comment=None)
+        original_node: cst.FunctionDef,
+        updated_node: cst.FunctionDef,
+    ):
+        if not updated_node.leading_lines:
+            return updated_node
 
-        return updated_node
+        new_lines = self._filter_leading_lines(updated_node.leading_lines)
+        return updated_node.with_changes(leading_lines=new_lines)
 
+    def leave_ClassDef(
+        self,
+        original_node: cst.ClassDef,
+        updated_node: cst.ClassDef,
+    ):
+        if not updated_node.leading_lines:
+            return updated_node
+
+        new_lines = self._filter_leading_lines(updated_node.leading_lines)
+        return updated_node.with_changes(leading_lines=new_lines)
 
 class HeaderCommentRemover(cst.CSTTransformer):
     """Transformer to remove shebang and coding comments."""
@@ -114,26 +131,26 @@ class HeaderCommentRemover(cst.CSTTransformer):
         original_node: cst.Module,
         updated_node: cst.Module,
     ) -> cst.Module:
-        if not updated_node.leading_lines:
+        if not updated_node.header:
             return updated_node
 
-        new_lines: list[cst.EmptyLine] = []
+        new_header: list[cst.EmptyLine] = []
 
-        for line in updated_node.leading_lines:
-            if isinstance(line, cst.EmptyLine) and line.comment:
-                comment_text = line.comment.value.strip().lower()
+        for line in updated_node.header:
+            if line.comment:
+                comment = line.comment.value.lower()
 
                 if (
-                    comment_text.startswith("#!")
-                    or "coding" in comment_text
-                    or comment_text.startswith("# vim:")
+                    comment.startswith("#!")
+                    or "coding" in comment
+                    or comment.startswith("# vim:")
                 ):
                     self.removed_count += 1
                     continue
 
-            new_lines.append(line)
+            new_header.append(line)
 
-        return updated_node.with_changes(leading_lines=new_lines)
+        return updated_node.with_changes(header=new_header)
 
 
 class DocstringRemover(cst.CSTTransformer):
