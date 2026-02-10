@@ -66,7 +66,6 @@ class InlineCommentRemover(cst.CSTTransformer):
 
         return updated_node
 
-
 class LeadingCommentRemover(cst.CSTTransformer):
     """Transformer to remove standalone leading comments everywhere."""
 
@@ -86,6 +85,7 @@ class LeadingCommentRemover(cst.CSTTransformer):
             new_lines.append(line)
 
         return new_lines
+
 
     def leave_SimpleStatementLine(
         self,
@@ -141,7 +141,7 @@ class HeaderCommentRemover(cst.CSTTransformer):
                 comment = line.comment.value.lower()
 
                 if (
-                    comment.startswith("#!")
+                    comment.startswith("#")
                     or "coding" in comment
                     or comment.startswith("# vim:")
                 ):

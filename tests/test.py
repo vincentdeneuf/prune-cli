@@ -1,4 +1,3 @@
-# This is a header comment that should be removed with --header
 
 """This is a module docstring that should be removed with tidy docstrings."""
 import logging
@@ -27,16 +26,13 @@ class DummyObject:
 obj = DummyObject()
 def example_function():
     """This is a function docstring that should be removed with tidy docstrings."""
-    print(
-        "This should be removed with tidy prints"
-    )  # This inline comment should be removed with tidy comments
-    x = 5  # type: int  # This comment should be preserved by default, removed with --inline
-    y = 10  # noqa: E501  # This comment should be preserved by default, removed with --inline
-    z = 15  # pragma: no cover  # This comment should be preserved by default, removed with --inline
+    x = 5  
+    y = 10  
+    z = 15  
     assert x > 0, (
         "x must be positive"
-    )  # This assert should be removed with tidy asserts
-    assert y is not None  # This assert should be removed with tidy asserts
+    )  
+    assert y is not None  
     log.trace("This is a trace log")
     log.info("This is an info log")
     log.warning("This is a warning log")
@@ -48,14 +44,12 @@ def example_function():
     x = logger.info("This should not be removed")
     logger.debug("This should not be removed").strip()
     custom_logger.info("This should not be removed")
-    print("Another print to remove")
-    obj.print("This should not be removed")  # This comment should be removed
+    obj.print("This should not be removed")  
     return x + y + z
 class ExampleClass:
     """This is a class docstring that should be removed with tidy docstrings."""
     def method(self):
         """This is a method docstring that should be removed with tidy docstrings."""
-        assert True  # This assert should be removed with tidy asserts
+        assert True  
         log.info("Method log message")
         return 42
-print("Third print to remove")  # Final inline comment to remove

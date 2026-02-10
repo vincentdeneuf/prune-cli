@@ -1,8 +1,8 @@
-#!/usr/bin/env python3
-# This is a header comment that should be removed with --header
-# This is a header comment that should be removed with --header
+#!/usr/bin/env python3 -> should be removed with --header
+# This is a leading comment that should be removed with --leading
+# This is a leading comment that should be removed with --leading
 
-# This is another header comment that should be removed with --header
+# This is another leading comment that should be removed with --leading
 
 """This is a module docstring that should be removed with tidy docstrings."""
 
