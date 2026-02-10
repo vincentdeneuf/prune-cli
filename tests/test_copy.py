@@ -106,3 +106,5 @@ class ExampleClass:
 
 # Another leading comment
 print("Third print to remove")  # Final inline comment to remove
+
+# Another leading comment

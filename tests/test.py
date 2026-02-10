@@ -29,18 +29,6 @@ def example_function():
     x = 5  
     y = 10  
     z = 15  
-    assert x > 0, (
-        "x must be positive"
-    )  
-    assert y is not None  
-    log.trace("This is a trace log")
-    log.info("This is an info log")
-    log.warning("This is a warning log")
-    log.success("This is a success log")
-    log.exception("This is an exception log")
-    log.critical("This is a critical log")
-    logger.info("Logger info message")
-    logging.warning("Logging warning message")
     x = logger.info("This should not be removed")
     logger.debug("This should not be removed").strip()
     custom_logger.info("This should not be removed")
@@ -50,6 +38,4 @@ class ExampleClass:
     """This is a class docstring that should be removed with tidy docstrings."""
     def method(self):
         """This is a method docstring that should be removed with tidy docstrings."""
-        assert True  
-        log.info("Method log message")
         return 42
